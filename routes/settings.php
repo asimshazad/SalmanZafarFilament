@@ -10,6 +10,15 @@ Route::get('generate', function (){
     echo 'Storage link created';
 });
 
+Route::get('/filament-optimize', function() {
+    Artisan::call('filament:optimize');
+    echo 'filament:optimize';
+});
+Route::get('/filament-optimize-clear', function() {
+    Artisan::call('filament:optimize-clear');
+    echo 'filament:optimize-clear';
+});
+
 Route::get('/config-cache', function() {
     Artisan::call('config:cache');
     echo 'config:cache';
