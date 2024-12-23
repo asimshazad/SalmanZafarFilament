@@ -33,6 +33,7 @@ class CountryObserver
         if ($country->country_photo) {
             $country->deleteCountryPhoto();
         }
+        $country->visaTypes()->delete();
     }
     /**
      * Handle the Country "updated" event.
