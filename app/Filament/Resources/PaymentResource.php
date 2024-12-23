@@ -11,7 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ExportAction;
-use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -58,7 +58,7 @@ class PaymentResource extends Resource
                 TextColumn::make('type')->sortable()->searchable(),
                 TextColumn::make('method')->sortable()->searchable(),
                 TextColumn::make('user.name')->sortable()->searchable(),
-                BooleanColumn::make('status'),
+                IconColumn::make('status')->boolean(),
             ])
             ->filters([
                 //

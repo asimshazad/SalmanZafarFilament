@@ -72,7 +72,7 @@ class CountryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\ImageColumn::make('country_photo')->disk('public'),
-                Tables\Columns\BooleanColumn::make('status')->sortable(),
+                Tables\Columns\IconColumn::make('status')->boolean()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()->dateTime(),
             ])
             ->filters([

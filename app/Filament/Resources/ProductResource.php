@@ -102,8 +102,8 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('slug'),
                 Tables\Columns\TextColumn::make('price')->money('usd'),
-                Tables\Columns\BooleanColumn::make('is_free'),
-                Tables\Columns\BooleanColumn::make('status'),
+                Tables\Columns\IconColumn::make('is_free')->boolean(),
+                Tables\Columns\IconColumn::make('status')->boolean(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([])

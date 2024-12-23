@@ -84,7 +84,7 @@ class EmailTemplateResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('key')->searchable(),
                 Tables\Columns\TextColumn::make('email_subject'),
-                Tables\Columns\BooleanColumn::make('status'),
+                Tables\Columns\IconColumn::make('status')->boolean(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([])

@@ -12,7 +12,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ExportAction;
-use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -53,7 +53,7 @@ class PermissionResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->sortable()->searchable(),
-                BooleanColumn::make('status')->boolean(),
+                IconColumn::make('status')->boolean(),
             ])
             ->filters([
                 //
