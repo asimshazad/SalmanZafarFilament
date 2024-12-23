@@ -10,10 +10,24 @@ Route::get('generate', function (){
     echo 'Storage link created';
 });
 
+Route::get('/config-cache', function() {
+    Artisan::call('config:cache');
+    echo 'config:cache';
+});
+Route::get('/route-cache', function() {
+    Artisan::call('route:cache');
+    echo 'route:cache';
+});
+Route::get('/view-cache', function() {
+    Artisan::call('view:cache');
+    echo 'view:cache';
+});
+
 Route::get('/cache-clear', function() {
     Artisan::call('cache:clear');
     echo 'cache:clear';
 });
+
 Route::get('/route-clear', function() {
     Artisan::call('route:clear');
     echo 'route:clear';
@@ -51,15 +65,15 @@ Route::get('/migrate', function() {
 //     Artisan::call('migrate:fresh');
 //     echo 'Tables re-created successfully';
 // });
-Route::get('/db-seed', function() {
-    Artisan::call('db:seed');
-    echo 'Seeder data added to tables';
-});
+// Route::get('/db-seed', function() {
+//     Artisan::call('db:seed');
+//     echo 'Seeder data added to tables';
+// });
 
-Route::get('/db-seed/{className}', function ($className){
-    Artisan::call('db:seed --class=' . $className);
-    echo $className . ' data added to tables';
-});
+// Route::get('/db-seed/{className}', function ($className){
+//     Artisan::call('db:seed --class=' . $className);
+//     echo $className . ' data added to tables';
+// });
 
 Route::get('test', function()
 {

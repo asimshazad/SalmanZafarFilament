@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\GuestResource\Pages;
+namespace App\Filament\Resources\GuestResource;
 
 use App\Models\Role;
 use Filament\Forms\Components\FileUpload;
@@ -10,7 +10,7 @@ use Filament\Pages\Auth\Register as AuthRegister;
 use Filament\Forms\Components\Component;
 use Filament\Forms;
 
-class Register extends AuthRegister
+class RegisterHandler extends AuthRegister
 {
 
     // public function getTitle(): string

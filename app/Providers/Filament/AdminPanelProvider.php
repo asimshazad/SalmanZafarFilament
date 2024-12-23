@@ -26,11 +26,11 @@ use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
 use App\Filament\Pages\Product;
 use App\Filament\Resources\DashboardResource;
-use App\Filament\Resources\GuestResource\Pages\Register;
+use App\Filament\Resources\GuestResource\RegisterHandler;
 use App\Models\User;
 use Filament\Navigation\MenuItem;
 use Illuminate\Support\Facades\Gate;
-use App\Filament\Resources\ProfileResource\Pages\EditProfile;
+use App\Filament\Resources\ProfileResource\EditProfile;
 use App\Models\Setting;
 
 class AdminPanelProvider extends PanelProvider
@@ -48,7 +48,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo($setting->site_logo_url)
             // ->brandLogoHeight('2rem') // optional
             ->favicon($setting->favicon_url)
-            ->registration(Register::class)
+            ->registration(RegisterHandler::class)
             ->passwordReset()
            ->emailVerification()
             ->profile(

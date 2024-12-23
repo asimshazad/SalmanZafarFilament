@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\ProfileResource\Pages;
+namespace App\Filament\Resources\ProfileResource;
 
 use App\Models\Role;
 use Filament\Forms\Components\FileUpload;
