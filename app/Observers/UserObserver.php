@@ -57,6 +57,9 @@ class UserObserver
         if (Gate::denies('Delete user')) {
             abort(403, 'Unauthorized action.');
         }
+        if ($user->user_photo) {
+            $user->deleteUserPhoto();
+        }
     }
     
     public function deleted(User $user): void
