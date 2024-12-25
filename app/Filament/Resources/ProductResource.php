@@ -16,6 +16,11 @@ use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Gate;
+use Filament\Tables\Filters\QueryBuilder;
+use Filament\Tables\Filters\QueryBuilder\Constraints\BooleanConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
 
 class ProductResource extends Resource
 {
@@ -99,20 +104,52 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                // 'product_photo'
+                Tables\Columns\ImageColumn::make('product_photo')->label('Image')->disk('public'),
                 Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('price')->money('usd'),
-                Tables\Columns\IconColumn::make('is_free')->boolean(),
-                Tables\Columns\IconColumn::make('status')->boolean(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime(),
+                Tables\Columns\TextColumn::make('slug')->searchable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->searchable()
+                    ->html()
+                    ->copyable()
+                    ->copyMessage("Copied Successfully")
+                    ->wrap(true)
+                    ->lineClamp(3)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('price')->money('usd')->searchable()->toggleable(),
+                Tables\Columns\TextColumn::make('discount')
+                    ->money('usd')->searchable()
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+                Tables\Columns\IconColumn::make('is_free')->boolean()->searchable()->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('status')->boolean()->toggleable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->date()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([])
+            ->filters([
+                QueryBuilder::make()
+                    ->constraints([
+                        TextConstraint::make('name'),
+                        TextConstraint::make('slug'),
+                        TextConstraint::make('description'),
+                        NumberConstraint::make('price')
+                            ->icon('heroicon-m-currency-dollar'),
+                        NumberConstraint::make('discount')
+                            ->icon('heroicon-m-currency-dollar'),
+                        BooleanConstraint::make('is_free'),
+                        BooleanConstraint::make('status'),
+                        DateConstraint::make('created_at'),
+                    ])
+                    ->constraintPickerColumns(2),
+            ], layout: Tables\Enums\FiltersLayout::AboveContentCollapsible) // will display filters on top of table
+            ->deferFilters()
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //Tables\Actions\DeleteBulkAction::make(),
             ])
             ->headerActions([
                 ExportAction::make()
